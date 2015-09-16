@@ -1,0 +1,23 @@
+<body ng-controller="TagCtrl">
+
+		<form name="myForm" novalidate ng-submit="tagSearch(query)" ng-cloak>
+			<header>
+				<div class="container">
+  				Hash tag search
+          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a tag to search" required/>
+  				<br>
+  				<input type="submit" class="buttons" value="Submit"/><br>
+        </div>
+			  <div class="clearFix"></div>
+			</header>
+    </form>
+
+			<section>
+				<div class="instagram-photo" ng-show="querried" >
+					<a class="image" ng-repeat="image in images" ng-href="{{image.link}}" target="_blank">
+					<img class="image"  ng-repeat="image in images" ng-src="{{image.images.low_resolution.url}}" />
+					</a>
+				</div>
+			</section>
+
+</body>

@@ -1,0 +1,21 @@
+<body ng-controller="TagCtrl">
+
+		<form name="myForm" novalidate ng-submit="LocCtrl(query)" ng-cloak>
+			<header>
+				<div class="container">
+  				Hash tag search
+          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a location to search" required/>
+  				<br>
+  				<input type="submit" class="buttons" value="Submit"/><br>
+        </div>
+			  <div class="clearFix"></div>
+			</header>
+    </form>
+
+			<section>
+				<div class="photos" ng-show="querried" >
+					<img class="resultImages"   ng-repeat="image in images" ng-src="{{image.images.low_resolution.url}}" />
+				</div>
+			</section>
+
+</body>
