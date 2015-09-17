@@ -1,39 +1,35 @@
-<div class="row text-center">
-	<div ng-controller="LocCtrl">
-		<input type="button" class="action-button animate red" value="Find Me!" ng-click="ButtonClick()" />
-		 <br>
-		 <div>
-			 Latitude: <span ng-bind="lat"></span><br>
-			 Longitude: <span ng-bind="lng"></span>
+<div ng-controller="LocCtrl">
+<!-- Begin wrapper for search button/location -->
+	<div class="row text-center">
+		<div>
+			<input type="button" class="action-button animate red" value="Find Me!" ng-click="ButtonClick()" />
+			 <br>
+			 <div ng-show="visible">
+				 Latitude: <span ng-bind="lat"></span><br>
+				 Longitude: <span ng-bind="lng"></span>
+			 </div>
 		 </div>
-	 </div>
-</div>
-
-		<form name="myForm" novalidate ng-submit="LocSearch(query)" ng-cloak>
-			<header>
-				<div class="container">
-  				<input type="submit" class="buttons" value="Submit"/><br>
-        </div>
-			</header>
-    </form>
-
-		<section class="instagram-photo" ng-show="querried" >
-			<div ng-repeat="image in images">
-				<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
-				<div class="media user-profile">
-					<div class="media-left"><img class="media-object" ng-src="{{ image.user.profile_picture }}"/></div>
-					<div class="media-body">
-						<h6>{{image.user.full_name}}</h6>
-						<p>{{image.caption.text}}</p>
-					</div>
-					<ul class="photo-meta list-inline">
-						<li>{{image.created_time | unixTimeFilter | date }}</li>
-						<li><span class="glyphicon glyphicon-heart"><strong>{{image.likes.count}}</strong></span> likes</span></li>
-						<li>{{image.location.name}}</li>
-						<li>Lat: {{image.location.latitude}}</li>
-						<li>Lng: {{image.location.longitude}}</li>
-					</ul>
+	</div>
+<!-- End wrapper for search button/location -->
+<!-- Begin parsing images to DOM -->
+	<section class="instagram-photo" ng-show="results" >
+		<div ng-repeat="image in images">
+			<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
+			<div class="media user-profile">
+				<div class="media-left"><img class="media-object" ng-src="{{ image.user.profile_picture }}"/></div>
+				<div class="media-body">
+					<h6>{{image.user.full_name}}</h6>
+					<p>{{image.caption.text}}</p>
 				</div>
+				<ul class="photo-meta list-inline">
+					<li>{{image.created_time | unixTimeFilter | date }}</li>
+					<li><span class="glyphicon glyphicon-heart"><strong>{{image.likes.count}}</strong></span> likes</span></li>
+					<li>{{image.location.name}}</li>
+					<li>Lat: {{image.location.latitude}}</li>
+					<li>Lng: {{image.location.longitude}}</li>
+				</ul>
 			</div>
-		</section>
+		</div>
+	</section>
+<!-- End parsing images to DOM  -->
 </div>

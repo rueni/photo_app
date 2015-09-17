@@ -1,75 +1,84 @@
 /* Controllers */
-/////////////////////////// Main logic for the app ///////////////////////////////
-var photoControllers = angular.module('photoControllers', []);
 
+var photoControllers = angular.module('photoControllers', []);
 /////////////////////////// Search Instagram by hashtag //////////////////////////
 photoControllers.controller('TagCtrl', ['$scope', '$http',
 // Search Form setup ///
   function ($scope, $http) {
     $scope.tagSearch = function(query) {
 // API Request setup ///
+// https://api.instagram.com/v1/tags/{tag-name}/media/recent?access_token=ACCESS-TOKEN
     var search = query.replace(/\s+/g, '_').toLowerCase();
-    var url ='https://api.instagram.com/v1/tags/' + search + '/media/recent';
+    var URL ='https://api.instagram.com/v1/tags/' + search + '/media/recent';
     var request = {
       callback: 'JSON_CALLBACK',
       client_id: 'db407f272678438f8af287ae3110d714',
       count: 50
     };
-    $http({ method:'JSONP', url:url, params:request }).
-      success(function (data){
-        $scope.images = data.data;
-        $scope.results = true;
-        $scope.query = "";
+    $http({
+        method:'JSONP',
+        url:URL,
+        params:request
       }).
-      error(function () {
-        $scope.results = false;
-        console.log('error');
+        success(function (data){
+          $scope.images = data.data;
+          $scope.results = true;
+          $scope.query = "";
+      }).
+        error(function () {
+          $scope.results = false;
+          console.log('error');
       });
     };
   }]);
-///////////////////////////// Search Instagram by Location //////////////////////////
-// Fetch user geolocation
-photoControllers.controller('LocCtrl',
-function($scope, $window) {
 
-  $scope.ButtonClick = navigator.geolocation.getCurrentPosition(function(position){
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
 
-    $scope.$apply(function() {
-      $scope.lat = lat;
-      $scope.lng = lng;
-    });
-  });
-})
-//
-// photoControllers.controller('LocCtrl', ['$scope', '$http', '$window',
-// // Search Form setup ///
-//   function ($scope, $http) {
-//     $scope.locSearch = function(query) {
+///////////////////////////// Search Instagram by Location ///////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+photoControllers.controller('LocCtrl', ['$scope','$window', '$http',
+// click to retrieve user location
+function($scope, $window, $http) {
+  $scope.ButtonClick = function() {
+    var t = navigator.geolocation.getCurrentPosition(function(data) {
 
-// // API Request setup ////https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&?access_token=
-//         var url = 'https://api.instagram.com/v1/media/search';
-//         var request = {
-//                 lat: lat, // fetch from geolocation
-//                 lng: lng, // fetch from geolocation
-//                 callback: 'JSON_CALLBACK',
-//                 client_id: 'db407f272678438f8af287ae3110d714',
-//                 count: 50
-//         };
-//         $http({
-//           method: 'JSONP'
-//           url: url,
-//           params: request
-//           }).
-//           success(function (data){
-//             $scope.images = data.data;
-//             $scope.querried = true;
-//             $scope.query = "";
-//           }).
-//           error(function () {
-//             $scope.querried = false;
-//             console.log('error');
-//           });
-//         };
-//       ]);
+      var lat = data.coords.latitude;
+      var lng = data.coords.longitude;
+
+      $scope.$apply(function() {
+        $scope.lat = lat;
+        $scope.lng = lng;
+      });
+
+      $scope.visible = true;
+      $scope.toggle = function() {
+        $scope.visible = !$scope.visible;
+      }
+// API Request setup ///
+// https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=ACCESS-TOKEN
+      var URL = 'https://api.instagram.com/v1/media/search?';
+      var request = {
+        lat: $scope.lat,
+        lng: $scope.lng,
+        callback: 'JSON_CALLBACK',
+        client_id: 'db407f272678438f8af287ae3110d714',
+        count: 50
+      };
+      $http({
+        method: 'JSONP',
+        url: URL,
+        params: request
+      }).
+        success(function (data){
+          console.log(data);
+          $scope.images = data.data;
+          $scope.results = true;
+          $scope.query = "";
+      }).
+        error(function () {
+          $scope.results = false;
+          console.log('error');
+        });
+      });
+    };
+  }
+]);

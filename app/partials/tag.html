@@ -1,16 +1,15 @@
 <body ng-controller="TagCtrl">
-	<div class="row text-center">
+	<div class="row text-center search">
 		<!-- search box  -->
-				<form name="myForm" class="search" novalidate ng-submit="tagSearch(query)" ng-cloak>
-					<header>
-						<div class="container">
-		          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a Hashtag" required/><br>
-		  				<input type="submit" class="action-button animate red" value="Submit"/><br>
-		        </div>
-					</header>
-    		</form>
-
-		</div>
+		<form name="myForm"  novalidate ng-submit="tagSearch(query)" ng-cloak>
+			<header>
+				<div class="container">
+          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a Hashtag" required/><br>
+  				<input type="submit" class="action-button animate red" value="Submit"/><br>
+        </div>
+			</header>
+		</form>
+	</div>
 <!-- images render here -->
 			<section class="instagram-photo" ng-show="results" >
 				<div ng-repeat="image in images">
@@ -23,10 +22,10 @@
 						</div>
 						<ul class="photo-meta list-inline">
 							<li>{{image.created_time | unixTimeFilter | date }}</li>
-							<li><span class="glyphicon glyphicon-heart"><strong>{{image.likes.count}}</strong></span> likes</span></li>
+							<li><span class="glyphicon glyphicon-heart">{{image.likes.count}}</span> likes</span></li>
 							<li>{{image.location.name}}</li>
-							<li>Lat: {{image.location.latitude}}</li>
-							<li>Lng: {{image.location.longitude}}</li>
+							<!-- <li>Lat: {{image.location.latitude}}</li>
+							<li>Lng: {{image.location.longitude}}</li> -->
 						</ul>
 					</div>
 				</div>
