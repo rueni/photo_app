@@ -20,8 +20,8 @@ photoApp.config(['$routeProvider',
       }).
       when('/location', {
         templateUrl: 'partials/search.html',
-        controller: 'findUser'
-      });
+        controller: 'LocCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });

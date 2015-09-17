@@ -1,13 +1,17 @@
-<div ng-controller="findUser">
+<div class="row text-center">
+	<div ng-controller="LocCtrl">
+		<input type="button" class="action-button animate red" value="Find Me!" ng-click="ButtonClick()" />
+		 <br>
+		 <div>
+			 Latitude: <span ng-bind="lat"></span><br>
+			 Longitude: <span ng-bind="lng"></span>
+		 </div>
+	 </div>
+</div>
 
-	<p >Latitude: {{lat}}, Longitude: {{lng}} </p>
-<!--
 		<form name="myForm" novalidate ng-submit="LocSearch(query)" ng-cloak>
 			<header>
 				<div class="container">
-  				Hash tag search
-          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a location to search" required/>
-  				<br>
   				<input type="submit" class="buttons" value="Submit"/><br>
         </div>
 			</header>
@@ -31,5 +35,5 @@
 					</ul>
 				</div>
 			</div>
-		</section> -->
+		</section>
 </div>

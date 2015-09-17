@@ -24,8 +24,63 @@
 /*End style for navigation bar*/
 
 /*default view port*/
+body {
+	background: #3f4c6b;
+}
 .view-frame {
   padding-top: 75px;
+}
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url("http://abstractatus.com/images/2013/07/download-cool-backgrounds-hd-of-art-hd.jpg");
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+/*search form design*/
+.search {
+	display:block;
+	border:0;
+	outline:0;
+	border-radius:2px;
+	box-shadow:0px 2px 1px rgba(0,0,0,.1);
+	color:#000;
+	padding:20px;
+	font-size:20px;
+	font-family:"Helvetica Neue", Helvetica, Arial;
+	}
+/*button design*/
+.animate:hover {
+	transition: all 0.1s;
+	background: #ddd;
+	-webkit-transition: all 0.1s;
+}
+.action-button
+{
+	position: relative;
+	border: none;
+	padding: 10px 40px;
+	margin: 20px 10px 10px 0px;
+	border-radius: 8px;
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;
+}
+.red
+{
+	background-color: #E74C3C;
+	border-bottom: 5px solid #BD3E31;
+	text-shadow: 0px -2px #BD3E31;
+}
+.action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
 }
 /*end default view port*/
 
@@ -33,11 +88,11 @@
 
 .instagram-photo {
 	max-width: 320px;
+	background: white;
 	margin: 0 auto 10px;
 	border: thin solid #ddd;
 	border-radius: 3px;
 	animation: fadeIn 0.6s $ease-out-expo both;
-
 	// Photo wrapper
 	> a {
 		display: block;

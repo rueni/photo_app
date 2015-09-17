@@ -1,17 +1,18 @@
 <body ng-controller="TagCtrl">
+	<div class="row text-center">
+		<!-- search box  -->
+				<form name="myForm" class="search" novalidate ng-submit="tagSearch(query)" ng-cloak>
+					<header>
+						<div class="container">
+		          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a Hashtag" required/><br>
+		  				<input type="submit" class="action-button animate red" value="Submit"/><br>
+		        </div>
+					</header>
+    		</form>
 
-		<form name="myForm" novalidate ng-submit="tagSearch(query)" ng-cloak>
-			<header>
-				<div class="container">
-  				Hash tag search
-          <input class="querry" type="text" name="search" ng-model="query" placeholder="Enter a tag to search" required/>
-  				<br>
-  				<input type="submit" class="buttons" value="Submit"/><br>
-        </div>
-			</header>
-    </form>
-
-			<section class="instagram-photo" ng-show="querried" >
+		</div>
+<!-- images render here -->
+			<section class="instagram-photo" ng-show="results" >
 				<div ng-repeat="image in images">
 					<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
 					<div class="media user-profile">
@@ -30,6 +31,5 @@
 					</div>
 				</div>
 			</section>
-
 
 </body>
