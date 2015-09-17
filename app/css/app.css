@@ -1,61 +1,76 @@
 
 /*Begin style for navigation bar*/
-.navbar-toggle {
-  border: none;
-  background: transparent !important;
-
-  &:hover {
-    background: transparent !important;
-  }
-
-  .icon-bar {
-    width: 22px;
-    transition: all 0.2s;
-  }
-  .top-bar {
-    transform: rotate(45deg);
-    transform-origin: 10% 10%;
-  }
-  .middle-bar {
-    opacity: 0;
-  }
-  .bottom-bar {
-    transform: rotate(-45deg);
-    transform-origin: 10% 90%;
-  }
-
-  &.collapsed {
-    .top-bar {
-      transform: rotate(0);
-    }
-    .middle-bar {
-      opacity: 1;
-    }
-    .bottom-bar {
-      transform: rotate(0);
-    }
-  }
+.navbar-toggle .icon-bar:nth-of-type(2) {
+	  top: 1px;
+}
+.navbar-toggle .icon-bar:nth-of-type(3) {
+  	top: 2px;
+}
+.navbar-toggle .icon-bar {
+	  position: relative;
+	  transition: all 500ms ease-in-out;
+}
+.navbar-toggle.active .icon-bar:nth-of-type(1) {
+	  top: 6px;
+	  transform: rotate(45deg);
+}
+.navbar-toggle.active .icon-bar:nth-of-type(2) {
+	  background-color: transparent;
+}
+.navbar-toggle.active .icon-bar:nth-of-type(3) {
+	  top: -6px;
+	  transform: rotate(-45deg);
 }
 /*End style for navigation bar*/
 
+/*default view port*/
+.view-frame {
+  padding-top: 75px;
+}
+/*end default view port*/
+
 /*begin style for instagram images*/
+
 .instagram-photo {
-  max-width: 320px;
-  margin: 0 auto 10px;
+	max-width: 320px;
+	margin: 0 auto 10px;
+	border: thin solid #ddd;
+	border-radius: 3px;
+	animation: fadeIn 0.6s $ease-out-expo both;
 
-  border: thin solid #ddd;
-  border-radius: 3px;
-
-  animation: fadeIn 0.6s $ease-out-expo both;
+	// Photo wrapper
+	> a {
+		display: block;
+		height: 0;
+		padding-bottom: 100%;
+		background: #242322;
+		img {
+			animation: fadeIn 0.5s $ease-out-expo both 0.2s;
+		}
+	}
+	.image {
+		width: 100%;
+		height: auto;
+	}
+}
+@keyframes fadeIn {
+	0% { opacity: 0; }
 }
 
-/*photo wrapper*/
-.image a {
-  display: block;
-  height: 0;
-  padding-bottom: 100%;
-  background: #242322;
+.instagram-photo .user-profile {
+	padding: 0 10px;
+	p {
+		margin: 0;
+	}
 }
-.image img {
-  animation: fadeIn 0.6s $ease-out-expo both;
+.media-object {
+	width: 30px;
+	height: 30px;
+}
+.media-body {
+	width: auto;
+}
+.photo-meta {
+	color: #aaa;
+	font-size: 10px;
 }

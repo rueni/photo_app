@@ -8,16 +8,28 @@
   				<br>
   				<input type="submit" class="buttons" value="Submit"/><br>
         </div>
-			  <div class="clearFix"></div>
 			</header>
     </form>
 
-			<section>
-				<div class="instagram-photo" ng-show="querried" >
-					<a class="image" ng-repeat="image in images" ng-href="{{image.link}}" target="_blank">
-					<img class="image"  ng-repeat="image in images" ng-src="{{image.images.low_resolution.url}}" />
-					</a>
+			<section class="instagram-photo" ng-show="querried" >
+				<div ng-repeat="image in images">
+					<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
+					<div class="media user-profile">
+						<div class="media-left"><img class="media-object" ng-src="{{ image.user.profile_picture }}"/></div>
+						<div class="media-body">
+							<h6>{{image.user.full_name}}</h6>
+							<p>{{image.caption.text}}</p>
+						</div>
+						<ul class="photo-meta list-inline">
+							<li>{{image.created_time | unixTimeFilter | date }}</li>
+							<li><span class="glyphicon glyphicon-heart"><strong>{{image.likes.count}}</strong></span> likes</span></li>
+							<li>{{image.location.name}}</li>
+							<li>Lat: {{image.location.latitude}}</li>
+							<li>Lng: {{image.location.longitude}}</li>
+						</ul>
+					</div>
 				</div>
 			</section>
+
 
 </body>

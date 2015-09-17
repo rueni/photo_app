@@ -10,7 +10,6 @@
     "http-server": "^0.6.1"
   },
   "scripts": {
-    "postinstall": "bower install",
     "prestart": "npm install",
     "start": "http-server -a localhost -p 5000 -c-1"
   }

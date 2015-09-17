@@ -3,6 +3,7 @@
 /* App Module */
 
 var photoApp = angular.module('photoApp', [
+  'photoFilters',
   'ngRoute',
   'photoControllers'
 ]);
@@ -18,8 +19,9 @@ photoApp.config(['$routeProvider',
         controller: 'TagCtrl'
       }).
       when('/location', {
-        templateUrl: 'partials/location.html',
-      }).
+        templateUrl: 'partials/search.html',
+        controller: 'findUser'
+      });
       otherwise({
         redirectTo: '/'
       });
