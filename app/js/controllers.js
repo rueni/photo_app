@@ -7,7 +7,6 @@ photoControllers.controller('TagCtrl', ['$scope', '$http',
   function ($scope, $http) {
     $scope.tagSearch = function(query) {
 // API Request setup ///
-// https://api.instagram.com/v1/tags/{tag-name}/media/recent?access_token=ACCESS-TOKEN
     var search = query.replace(/\s+/g, '_').toLowerCase();
     var URL ='https://api.instagram.com/v1/tags/' + search + '/media/recent';
     var request = {
@@ -32,9 +31,7 @@ photoControllers.controller('TagCtrl', ['$scope', '$http',
     };
   }]);
 
-
 ///////////////////////////// Search Instagram by Location ///////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 photoControllers.controller('LocCtrl', ['$scope','$window', '$http',
 // click to retrieve user location
 function($scope, $window, $http) {
@@ -54,13 +51,13 @@ function($scope, $window, $http) {
         $scope.visible = !$scope.visible;
       }
 // API Request setup ///
-// https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=ACCESS-TOKEN
       var URL = 'https://api.instagram.com/v1/media/search?';
       var request = {
         lat: $scope.lat,
         lng: $scope.lng,
         callback: 'JSON_CALLBACK',
         client_id: 'db407f272678438f8af287ae3110d714',
+        distance: 2000,
         count: 50
       };
       $http({
@@ -69,7 +66,9 @@ function($scope, $window, $http) {
         params: request
       }).
         success(function (data){
-          console.log(data);
+          var newDataSet = buildInstagramData(data);
+          // console.log(data);
+          console.log('API fetch successful');
           $scope.images = data.data;
           $scope.results = true;
           $scope.query = "";
@@ -80,5 +79,40 @@ function($scope, $window, $http) {
         });
       });
     };
+  /**
+   * buildInstagramData
+   * @data - params from server call
+   */
+  function buildInstagramData(data) {
+    var temp = [];
+    var lat = $scope.lat;
+    var lng = $scope.lng;
+    for (var item in data.data) {
+      var newObj = data.data[item];
+      var p1 ={lat: newObj.location.latitude, lng: newObj.location.longitude};
+      var p2 ={lat: lat, lng: lng};
+      newObj.distance = getDistance(p1, p2);
+      temp.push(newObj);
+    }
+    console.log('new object created with custom distance attribute');
+    console.log(temp);
+    return temp;
+  }
+// Haversine formula for measuring distance between two points
+// http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3
+  var rad = function(x) {
+  return x * Math.PI / 180;
+  };
+  var getDistance = function(p1, p2) {
+    var R = 6378137; // Earth’s mean radius in meter
+    var dLat = rad(p2.lat - p1.lat);
+    var dLong = rad(p2.lng - p1.lng);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+      Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d; // returns the distance in meter
+  };
   }
 ]);

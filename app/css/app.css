@@ -55,7 +55,7 @@ body {
 /*button design*/
 .animate:hover {
 	transition: all 0.1s;
-	background: #ddd;
+	background: #3498DB;
 	-webkit-transition: all 0.1s;
 }
 .action-button
@@ -76,6 +76,12 @@ body {
 	border-bottom: 5px solid #BD3E31;
 	text-shadow: 0px -2px #BD3E31;
 }
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
 .action-button:active
 {
 	transform: translate(0px,5px);
@@ -89,9 +95,9 @@ body {
 .instagram-photo {
 	max-width: 320px;
 	background: white;
-	margin: 0 auto 10px;
+	margin: 0 auto 5px;
 	border: thin solid #ddd;
-	border-radius: 3px;
+	border-radius: 2px;
 	animation: fadeIn 0.6s $ease-out-expo both;
 	// Photo wrapper
 	> a {

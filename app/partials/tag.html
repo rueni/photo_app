@@ -11,8 +11,8 @@
 		</form>
 	</div>
 <!-- images render here -->
-			<section class="instagram-photo" ng-show="results" >
-				<div ng-repeat="image in images">
+			<section ng-show="results" >
+				<div class="instagram-photo" ng-repeat="image in images">
 					<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
 					<div class="media user-profile">
 						<div class="media-left"><img class="media-object" ng-src="{{ image.user.profile_picture }}"/></div>
@@ -24,8 +24,6 @@
 							<li>{{image.created_time | unixTimeFilter | date }}</li>
 							<li><span class="glyphicon glyphicon-heart">{{image.likes.count}}</span> likes</span></li>
 							<li>{{image.location.name}}</li>
-							<!-- <li>Lat: {{image.location.latitude}}</li>
-							<li>Lng: {{image.location.longitude}}</li> -->
 						</ul>
 					</div>
 				</div>

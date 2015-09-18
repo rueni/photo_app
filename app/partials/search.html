@@ -2,18 +2,19 @@
 <!-- Begin wrapper for search button/location -->
 	<div class="row text-center">
 		<div>
-			<input type="button" class="action-button animate red" value="Find Me!" ng-click="ButtonClick()" />
+			<input type="button" class="action-button animate red" value="Fetch Images!" ng-click="ButtonClick()" />
 			 <br>
 			 <div ng-show="visible">
-				 Latitude: <span ng-bind="lat"></span><br>
-				 Longitude: <span ng-bind="lng"></span>
+				 <p class="action-button">
+				 Here are 50 images near you!
+				 </p>
 			 </div>
 		 </div>
 	</div>
 <!-- End wrapper for search button/location -->
 <!-- Begin parsing images to DOM -->
-	<section class="instagram-photo" ng-show="results" >
-		<div ng-repeat="image in images">
+	<section ng-show="results" >
+		<div class="instagram-photo" ng-repeat="image in images | orderBy:'distance'">
 			<a class="image" ng-href="{{image.link}}" target="_blank"><img class="image" ng-src="{{image.images.low_resolution.url}}" /></a>
 			<div class="media user-profile">
 				<div class="media-left"><img class="media-object" ng-src="{{ image.user.profile_picture }}"/></div>
@@ -24,9 +25,8 @@
 				<ul class="photo-meta list-inline">
 					<li>{{image.created_time | unixTimeFilter | date }}</li>
 					<li><span class="glyphicon glyphicon-heart"><strong>{{image.likes.count}}</strong></span> likes</span></li>
-					<li>{{image.location.name}}</li>
-					<li>Lat: {{image.location.latitude}}</li>
-					<li>Lng: {{image.location.longitude}}</li>
+					<li><strong>{{image.location.name}}</strong></li>
+					<li>Distance: {{image.distance | number:0 | distance }}</li>
 				</ul>
 			</div>
 		</div>

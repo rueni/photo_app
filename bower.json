@@ -10,7 +10,9 @@
     "angular-animate": "~1.4.5",
     "angular-loader": "~1.4.0",
     "angular-resource": "~1.4.5",
-    "angular-route": "~1.4.0",
-    "bootstrap": "~3.3.5"
+    "angular-route": "~1.4.0"
+  },
+  "devDependencies": {
+    "ui-bootstrap": "~0.13.4"
   }
 }

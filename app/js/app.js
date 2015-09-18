@@ -29,6 +29,7 @@ photoApp.config(['$routeProvider',
 
   $(document).ready(function () {
 	  $(".navbar-toggle").on("click", function () {
+      console.log(this);
 		    $(this).toggleClass("active");
 	  });
   });
